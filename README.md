@@ -1,1 +1,1 @@
-This is a test of some functionality
+This is a test of some functionality for Ansible.
