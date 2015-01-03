@@ -1,8 +1,8 @@
 class users {
-  include user-kpaige
+  include user-kman
   include sudo
 }
 
-node "puppetclient" {
+node default {
   include users
 }
