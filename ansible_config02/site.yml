@@ -1,0 +1,10 @@
+---
+# find all root passwords then update them to align
+- hosts: all
+  gather_facts: false
+  remote_user: kman
+  sudo: yes
+  tasks:
+  - name: Change Root Password
+    action: user name=root password="{{ new_password }}"
+

@@ -1,0 +1,1 @@
+alias ansible-playbook-vault='test -e vault-password.txt || gpg --decrypt-files vault-password.txt.gpg; ansible-playbook --vault-password-file vault-password.txt $@'
