@@ -1,5 +1,5 @@
 ---
-# find all root passwords then update them to align
+# Figure out the correct root password from a list and then update it to the current value 
 - name: 
   hosts: all
   gather_facts: false

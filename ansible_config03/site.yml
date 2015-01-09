@@ -1,0 +1,13 @@
+---
+# Let's create a random password for root and then update all systems specified to the random password
+  hosts: all
+  gather_facts: false
+  remote_user: kman
+  sudo:  yes
+
+  tasks:
+- name: Generate a Random Password, Salt it, then hash it
+  shell: python -c "from passlib.hash import sha512_crypt; from passlib.utils import generate_password as generate; print sha512_crypt.encrypt(generate(size=20))"
+  register: passit
+- name: Update the root password with a random password
+  user: name=root password={{ passit.stdout }} group=root

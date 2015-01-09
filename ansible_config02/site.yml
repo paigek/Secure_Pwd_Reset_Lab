@@ -1,5 +1,5 @@
 ---
-# find all root passwords then update them to align
+# Update the Root Password on all specified systems
 - hosts: all
   gather_facts: false
   remote_user: kman

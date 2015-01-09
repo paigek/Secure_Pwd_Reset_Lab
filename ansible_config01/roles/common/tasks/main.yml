@@ -1,7 +1,7 @@
 ---
-# find the root password, login then update password to align
+# Figure out which root password is in use, and then update it to the correct one.
 
-- name: test possible passwords
+- name: Test possible passwords
   local_action: shell sshpass -p {{ item }} ssh {{ user }}@{{ inventory_hostname }} date
   register: pastpass
   ignore_errors: true
@@ -15,10 +15,10 @@
   with_items: pastpass.results
   when: item.rc == 0
 
-- name: set the right password
+- name: Set the correct password and hide the password
   shell: python -c 'import crypt; print crypt.crypt("{{ password_update }}", "$1$SomeSalt$")'
-  register: foo
+  register: passit
   no_log: True
 
-- name: set the right password
-  user: name=root password={{ foo.stdout }} group=root
+- name: Update the password of user root
+  user: name=root password={{ passit.stdout }} group=root
